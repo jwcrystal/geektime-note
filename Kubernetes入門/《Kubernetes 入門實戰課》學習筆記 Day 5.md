@@ -78,7 +78,7 @@ $ kubectl create secret generic user --from-literal=name=root $out
      --kubernetes-version=v1.23.3
     ```
 
-
+- 如果普通用戶需要透過 kubectl 執行，需要建立 `.kube` 目錄，然後複製配置文件即可
 ```shell
 To start using your cluster, you need to run the following as a regular user:
 
@@ -86,3 +86,37 @@ $ mkdir -p $HOME/.kube
 $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config 
 $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+
+### Workder 節點安裝
+
+- kubeadm join
+    
+    - 其他節點需要加入集群，需要用到指令中的 `token` 和 `ca 憑證 (如果集群需要)`
+```shell
+Then you can join any number of worker  nodes by running the following on each as root:
+$ kubeadm join <Master address>:6443 \
+--token tv9mkx.tw7it9vphe158e74 \ 
+--discovery-token-ca-cert-hash sha256:e8721b8630d5b562e23c010c70559a6d3084f629abad6a2920e87855f8fb96f3
+``` 
+
+### CNI 插件
+
+- 常用 CNI 插件
+    - [flannel](https://github.com/flannel-io/flannel/)
+    - [calico](https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart)
+    - [cilium](https://github.com/cilium/cilium)
+
+- 需要留意點
+    - **kubeadm 的參數 `--pod-network-cidr` 設置的地址需要跟 CNI 插件的 config 網路地址一致**
+    - Flannel: 10.244.0.0/16
+    - Calico: 192.168.0.0/16
+
+### 小結
+
+- kubeadm 是一個方便易用的 Kubernetes 工具，能夠部署生產級別的 Kubernetes 集群
+- **安裝 Kubernetes 之前需要修改主機的配置，包括主機名、Docker 配置、網絡設置、交換分區等**
+- Kubernetes 的組件鏡像存放在 gcr.io
+- 安裝 `Master` 節點需要使用命令 `kubeadm init`，安裝 `Worker` 節點需要使用命令 `kubeadm join`，還要部署如 Flannel、Calico 等網路插件才能讓集群正常工作
+- 一些 script 部署腳本 https://github.com/chronolaw/k8s_study/tree/master/admin
+
+![](media/16742033147119/16743107533458.jpg)
