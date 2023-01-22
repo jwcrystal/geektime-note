@@ -1,5 +1,8 @@
 # 《Kubernetes 入門實戰課》學習筆記 Day 5
 
+### 以 Pod 為中心的 Kubernetes 資源關係圖
+![](media/16742033147119/16743924495223.jpg)
+
 ### 常用指令
 
 - Kubernetes 版本支持的所有 api 對象
