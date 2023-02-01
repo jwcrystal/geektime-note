@@ -167,7 +167,7 @@ spec:
 
 目前，**Kubernetes 里各種存儲設備都有相應的 Provisioner 對象**
 - NFS：Provisioner 為 [NFS subdir external provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
-- Local Storage：Provisioner 可以用 [sig-storage-local-static-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner)
+- Local Storage Provisioner： 可以用 [sig-storage-local-static-provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner)
 
 NFS Provisioner 也是以 Pod 的形式運行在 Kubernetes 里的，在 GitHub 的 deploy 目錄里是部署它所需的 YAML 文件，一共有三個，分別是 `rbac.yaml`、`class.yaml` 和 `deployment.yaml`。
 
