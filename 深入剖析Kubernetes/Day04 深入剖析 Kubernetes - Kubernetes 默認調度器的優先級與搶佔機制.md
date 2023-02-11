@@ -1,6 +1,9 @@
 # Day04 深入剖析 Kubernetes - Kubernetes 默認調度器的優先級與搶佔機制
 
 ## Kubernetes 默認調度器的優先級與搶佔機制
+> Ref:
+> - [Pod Priority and Preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#how-to-use-priority-and-preemption)
+
 
 **`優先級`（Priority）和`搶佔機制`（Preemption），解決的是 Pod 調度失敗時的問題。**
 
@@ -50,9 +53,9 @@ Priorities階段會為 **Node 打分，Pod 調度到得分最高的 Node 上**�
 
 Kuberentes 中可以為 Pod 設置優先級：
 
-- 高優先級的 Pod： 
-    - 在調度隊列中先出隊進行調度
-    - 調度失敗時，觸發搶佔，調度器為其搶佔低優先級 Pod 的資源。
+- **高優先級的 Pod：**
+    - **在調度隊列中先出隊進行調度**
+    - **調度失敗時，觸發搶佔，調度器為其搶佔低優先級 Pod 的資源**
 
 Kuberentes 默認調度器有 2 個調度隊列：
 
@@ -64,15 +67,15 @@ Kuberentes 默認調度器有 2 個調度隊列：
 - 調度器將所有節點訊息複製一份，開始模擬搶佔 ->  
 - 檢查副本里的每一個節點，然後從該節點上逐個刪除低優先級 Pod，直到滿足搶佔者能運行 -> 
 - 找到一個能運行搶佔者 Pod 的 Node -> 
-- Pod 記錄下這個 Node 名字 (status.nominatedNodeName) 和被刪除 Pod 的列表 -> 
+- Pod 記錄下這個 Node 名字 (`status.nominatedNodeName`) 和被刪除 Pod 的列表 -> 
 - 模擬搶佔結束 -> 
 - 開始真正搶佔 -> 
 - 刪除被搶佔者的 Pod，將搶佔者調度到 Node 上。
 
 
-在為某一對 Pod 和 Node 執行 Predicates 算法的時候，如果待檢查的 Node 是一個即將被搶佔的節點，即：調度隊列里有 nominatedNodeName 字段值是該 Node 名字的 Pod 存在（潛在的搶佔者）。那麼，調度器就會對這個 Node ，將同樣的 Predicates 算法運行兩遍。
+在為某一對 Pod 和 Node 執行 `Predicates` 算法的時候，如果待檢查的 Node 是一個即將被搶佔的節點，即：調度隊列里有 `nominatedNodeName` 字段值是該 Node 名字的 Pod 存在（潛在的搶佔者）。那麼，調度器就會對這個 Node ，將同樣的 `Predicates` 算法運行兩遍。
 
-- 第一遍， 調度器會假設上述**潛在的搶佔者**已經運行在這個節點上，然後執行 `Predicates` 算法。（InterPodAntiAffinity）
+- 第一遍， 調度器會假設上述**潛在的搶佔者**已經運行在這個節點上，然後執行 `Predicates` 算法。（`InterPodAntiAffinity`）
 - 第二遍， 調度器會正常執行 Predicates 算法，即：不考慮任何潛在的搶佔者。而**只有這兩遍 Predicates 算法都能通過時，這個 Pod 和 Node 才會被認為是可以綁定（bind）的**。
 
 此文章為2月Day04學習筆記，內容來源於極客時間[《深入剖析Kuberentes》](https://time.geekbang.org/column/article/70519)

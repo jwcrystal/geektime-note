@@ -1,6 +1,9 @@
 # Day02 深入剖析 Kubernetes - 十字路口上的Kubernetes默認調度器
 
 ## 十字路口上的Kubernetes默認調度器
+> Ref:
+> - [Scheduling Framework](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/)
+
 
 在 Kubernetes 項目中，默認調度器（`default scheduler`）的**主要職責，就是為一個新創建出來的 Pod，尋找一個最合適的節點（Node）**。
 

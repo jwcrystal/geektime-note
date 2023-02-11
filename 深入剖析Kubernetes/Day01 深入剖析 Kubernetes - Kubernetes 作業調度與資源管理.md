@@ -1,6 +1,10 @@
 # Day01 深入剖析 Kubernetes - Kubernetes 作業調度與資源管理
 
 ## Kubernetes 資源模型與資源管理
+> Ref:
+> - [Scheduling, Preemption and Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+> - [Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/)
+
 
 Kubernetes 的資源管理與調度部分的基礎，為資源模型。
 

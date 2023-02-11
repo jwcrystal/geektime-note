@@ -8,7 +8,7 @@
 
 默認調度策略有 4 種：
 
-`GeneralPredicates`:
+#### GeneralPredicates
     
 - **負責最基礎的調度策略**，如 `PodFitsResources` 計算宿主機的 CPU 和內存資源是否足夠
 - `PodFitsResources` 檢查的只是 Pod 的 `requests` 字段
@@ -36,7 +36,7 @@ spec:
 
 - `kubelet` 在啓動 Pod 前，會執行一個 `Admit` 操作來進行二次確認。這裡二次確認的規則，就是執行一遍 `GeneralPredicates`
 
-`跟 volume 相關過濾規則`:
+#### 跟 volume 相關過濾規則:
 
 - 負責跟容器持久化 `Volume` 相關的調度策略
 - `NoDiskConflict`: 是多個 Pod 聲明掛載的持久化 Volume 是否有衝突
@@ -69,13 +69,13 @@ spec:
           - my-node # 節點名稱
 ```
 
-`跟宿主機相關過濾規則`:
+#### 跟宿主機相關過濾規則:
 
 - 主要考察待調度 Pod 是否滿足 Node 本身的某些條件
 - `PodToleratesNodeTaints`: 檢查污點（taint），可以容忍污點的 Pod 才可以被調度到相應的節點上
 - `NodeMemoryPressurePredicate`: 檢查節點內存是否足夠，不夠不調度
 
-`跟 Pod 相關過濾規則`:
+#### 跟 Pod 相關過濾規則:
 
 - 大多雷同 `GeneralPredicates` 規則
 - `PodAffinityPredicate`: 檢查待調度 Pod 與 Node 上已有 Pod 之間的 親和（`affinity`）與反親和（`anti-affinity`）關係
@@ -126,9 +126,9 @@ spec:
     image: docker.io/ocpqe/hello-pod
 ```
 
-
 在具體執行的時候， 當開始調度一個 Pod 時，Kubernetes 調度器會同時啓動 16 個 Goroutine，來併發地為集群里的所有 Node 計算 Predicates，最後返回可以運行這個 Pod 的宿主機列表。
 
+![](media/16758695979848/16760965595030.jpg)
 
 ### Priority
 
@@ -162,4 +162,9 @@ score = 10 - variance(cpuFraction,memoryFraction,volumeFraction)*10
 
 -  `SelectorSpreadPriority`: kubernetes 內置的一個 priority 策略
     - 具體：與services上其他pod盡量不在同一個節點上，節點上同一個Service里pod數量越少得分越高。
--  自定義策略，實現自己的負載均衡算法（一次性哈希等）。此文章為2月Day03學習筆記，內容來源於極客時間[《深入剖析Kuberentes》](https://time.geekbang.org/column/article/70211)
+-  自定義策略，實現自己的負載均衡算法（一次性哈希等）。### 小結![](media/16758695979848/16760965040554.jpg)
+![](media/16758695979848/16760965198053.jpg)
+![](media/16758695979848/16760965595030.jpg)
+![](media/16758695979848/16760965827703.jpg)
+![](media/16758695979848/16760965989925.jpg)
+此文章為2月Day03學習筆記，內容來源於極客時間[《深入剖析Kuberentes》](https://time.geekbang.org/column/article/70211)
