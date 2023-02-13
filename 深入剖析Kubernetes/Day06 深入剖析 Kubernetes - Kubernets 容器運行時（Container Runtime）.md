@@ -1,4 +1,4 @@
-# Day06 深入剖析 Kubernetes - Kubernets 容器運行時（Runtime）
+# Day06 深入剖析 Kubernetes - Kubernets 容器運行時（Container Runtime）
 
 ## SIG-Node 與 CRI
 
