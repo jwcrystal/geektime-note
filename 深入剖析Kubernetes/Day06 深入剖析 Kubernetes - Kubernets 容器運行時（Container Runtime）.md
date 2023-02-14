@@ -2,6 +2,8 @@
 
 ## SIG-Node 與 CRI
 
+在 Kuberentes 社區中，Kubelet 以及 CRI 相關的內容，都屬於 SIG-Node。
+
 `kubelet` 主要功能：在**調度**完成後，kubelet 需要負責將這個調度成功的 Pod，在宿主機上創建出來，並把它所定義的各個容器啓動起來。
 
 SyncLoop 事件驅動來自於：
@@ -24,7 +26,8 @@ kubelet 也是通過 `Watch` 機制，監聽了與自己相關的 Pod 對象的�
 
 ![](media/16760990687688/16761954029754.png)
 - 如創建 Pod，kubelet 實際上就會調用一個叫作 `GenericRuntime` 的通用組件來發起創建 Pod 的 **CRI 請求**
-- CRI 請求響應，為相對採用的 CRI 後端容器項目實現，如 `Docker`、`Containerd`、`CRI-O` 等
+- CRI 請求響應，為相對 CRI 後端容器項目實現，如 `Docker`、`Containerd`、`CRI-O` 等
+    - **不同的 `CRI shim` 有不同的容器實現方式**
     - **CRI 自訂義插件，作用為把具體的 CRI 請求轉換成對後端容器項目的請求或者操作**
 
 ## 小結
