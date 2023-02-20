@@ -205,4 +205,14 @@ func (c *Controller) syncHandler(key string) error {
 
 具體例子項目，可以從原文底部進行操作了解。
 
+### 思考點
+
+為什麼 Informer 和 SyncLoop 之間，要使用一個**工作隊列**來進行協調呢？
+
+- 達成解耦目的，因為 SyncLoop（控制循環）中執行的業務邏輯比較花費時間，如果沒有中間協調者進行解耦，Informer 執行週期可能會變長，甚至阻塞。
+    - 如創建一個真實的 Etcd 集群
+> **Informer 的 `WATCH` 機制對 API 對象變化的響應，則非常迅速**。所以，控制器里的業務邏輯就很可能會拖慢 Informer 的執行週期，甚至可能 Block 它。而要**協調這樣兩個快、慢任務的一個典型解決方法，就是引入一個工作隊列**。
+
 此文章為2月Day11學習筆記，內容來源於極客時間[《深入剖析Kuberentes》](https://time.geekbang.org/column/article/42076)
+
+《Linux0.11源碼趣讀》第二季重磅上線
