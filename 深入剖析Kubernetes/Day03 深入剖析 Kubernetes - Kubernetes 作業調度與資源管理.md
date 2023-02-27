@@ -1,4 +1,4 @@
-# Day03 深入剖析 Kubernetes - Kubernetes 默認調度器策略解析
+# Day03 深入剖析 Kubernetes - Kubernetes 作業調度與資源管理
 
 ## Kubernetes 默認調度器策略解析
 

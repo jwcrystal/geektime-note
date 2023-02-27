@@ -1,4 +1,4 @@
-# Day04 深入剖析 Kubernetes - Kubernetes 默認調度器的優先級與搶佔機制
+# Day04 深入剖析 Kubernetes - Kubernetes 作業調度與資源管理
 
 ## Kubernetes 默認調度器的優先級與搶佔機制
 > Ref:

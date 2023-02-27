@@ -1,6 +1,5 @@
 # Day07 深入剖析 Kubernetes - Kubernets 容器運行時（Container Runtime）
 
-
 ## 解讀 CRI 與 容器運行時 （Container Runtime）
 
 CRI 機制優勢在於，每種容器項目都可以實現自己的 CRI shim，也就是各自對 CRI 請求有自己的處理方式。

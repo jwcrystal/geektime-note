@@ -1,4 +1,4 @@
-# Day02 深入剖析 Kubernetes - 十字路口上的Kubernetes默認調度器
+# Day02 深入剖析 Kubernetes - Kubernetes 作業調度與資源管理
 
 ## 十字路口上的Kubernetes默認調度器
 > Ref:

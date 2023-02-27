@@ -1,4 +1,4 @@
-# Day05 深入剖析 Kubernetes - Kubernetes GPU 管理與 Device Plugin 機制
+# Day05 深入剖析 Kubernetes - Kubernetes 作業調度與資源管理
 
 ## Kubernetes GPU 管理與 Device Plugin 機制
 > Ref:
