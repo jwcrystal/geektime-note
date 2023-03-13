@@ -309,4 +309,18 @@ func growslice(et *_type, old slice, cap int) slice {
 ...
 ```
 
+## 參考文檔
+
+建議閱讀！
+
+- [Effective Go](https://golang.org/doc/effective_go.html)
+- [Uber Go Style](https://github.com/uber-go/guide/blob/master/style.md)
+- [50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/)
+- [Go Advice](https://github.com/cristaloleg/go-advice)
+- [Practical Go Benchmarks](https://www.instana.com/blog/practical-golang-benchmarks/)
+- [Benchmarks of Go serialization methods](https://github.com/alecthomas/go_serialization_benchmarks)
+- [Debugging performance issues in Go programs](https://github.com/golang/go/wiki/Performance)
+- [Go code refactoring: the 23x performance hunt](https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7)
+
+
 此文章為3月Day12學習筆記，內容來源於極客時間[《左耳聽風》](https://time.geekbang.org/column/article/332600)
