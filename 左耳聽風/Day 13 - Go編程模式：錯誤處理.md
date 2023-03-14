@@ -309,7 +309,7 @@ func (e *authorizationError) Cause() error {
 
 import "github.com/pkg/errors"
 
-//错误包装
+//錯誤包裝
 if err != nil {
     return errors.Wrap(err, "read failed")
 }
@@ -325,6 +325,7 @@ default:
 
 > 補充：
 > 在標準庫中，Go提供了構造錯誤值的兩種基本方法—— `errors.New` 和`fmt.Errorf`
+> 
 > Go 1.13 版本之前，兩種方法返回的是同一個實現 error 接口的類型實例
 
 ```go
@@ -349,14 +350,13 @@ func (e *errorString) Error() string {
 type wrapError struct {
     msg string
     err error
-} 
+}
 func (e *wrapError) Error() string {
     return e.msg
-} 
+}
 func (e *wrapError) Unwrap() error {
     return e.err
 }
-
 ```
 
 > 與 `errorString` 相比，`wrapError` 多實現了 `Unwrap` 方法，這使得被 `wrapError` 類型包裝的錯誤值在包裝錯誤鏈中被檢視（inspect）
@@ -370,7 +370,9 @@ errors.Is(err, ErrFoo) // true (僅適用於 Go 1.13 及後續版本)
 
 
 > error 接口是錯誤值提供者與錯誤值檢視者之間的契約
+> 
 > error 接口的實現者負責提供錯誤上下文供負責錯誤處理的代碼使用
+> 
 > 這種錯誤上下文與 error 接口類型的分離體現了Go設計哲學中的正交理念
 
 
