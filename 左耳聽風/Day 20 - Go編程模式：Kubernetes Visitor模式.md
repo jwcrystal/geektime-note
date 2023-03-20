@@ -5,6 +5,10 @@
 
 **Visitor 模式是面向對象設計模式中一個設計模式，是將算法與操作對象的數據結構分離的一種方法**。這種分離的結果是能夠在不修改結構情況下，向現有的對象結構加入新操作，為遵循 OCP 原則（開閉原則）的一種方法。
 
+其 UML 圖如下
+![](media/16792367243932/16792952299749.jpg)
+
+
 ## 簡單示例
 
 - 代碼中有一個 `Visitor` 函數定義和一個 `Shape` 接口，需要使用 `Visitor` 函數作為參數
@@ -247,20 +251,28 @@ func (v DecoratedVisitor) Visit(fn VisitorFunc) error {
   })
 }
 ```
+> 這個其實稱為 **DecoratedVistor**，其包含一個 Visitor 和一些 decorators(VisitorFunc)，當執行 `Visit()` 方法時候，會照順序執行 全部 decorators。
+
 client 代碼修改為：
 ```go
 info := &Info{}
 NameVisitor := func() VisitorFunc {
 	return func(info *Info, err error) error {
-		fmt.Println("NameVisitor2() before call function")
-		fmt.Println("NameVisitor2() after call function")
+		fmt.Println("NameVisitor() before call function")
+		fmt.Println("NameVisitor() after call function")
 		return nil
 	}
 }
-
-v = NewDecoratedVisitor(v, NameVisitor1())
+NameVisitor1 := func(info *Info, err error) error {
+		fmt.Println("NameVisitor1() before call function")
+		fmt.Println("NameVisitor1() after call function")
+		return nil
+	}
+}
+v = NewDecoratedVisitor(v, NameVisitor(), NameVisitor1)
 
 v.Visit(LoadFile)
 ```
+> 雖然都可以 work，但 `NameVisitor1` 較為符合修飾器模式用法。
 
 此文章為3月Day20學習筆記，內容來源於極客時間[《左耳聽風》](https://time.geekbang.org/column/article/332612)
