@@ -70,4 +70,4 @@
 
 將會學習如何入門編程。從簡單入手的程式語言，到使用工具，再到相關學習範疇，最後透過實戰項目，幫助理解及鞏固所學的知識。
 
-此文章為3月Day22學習筆記，內容來源於極客時間[《左耳聽風》](https://time.geekbang.org/column/article/8136)
+此文章為3月Day22學習筆記，內容來源於極客時間[《左耳聽風》](https://time.geekbang.org/column/article/8216)
